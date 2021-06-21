@@ -1,0 +1,211 @@
+\documentclass[11pt,a4paper]{article}
+
+
+% just for the example
+\usepackage{lipsum}
+% Set margins
+\usepackage[margin=35mm]{geometry}
+
+% for graphics
+\usepackage{graphicx}
+
+% for crimson text
+\usepackage{crimson}
+\usepackage[T1]{fontenc}
+
+% setup parameter indentation
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+% for 1.15 spacing between text
+\renewcommand{\baselinestretch}{1.0}
+
+% For defining spacing between headers
+\usepackage{titlesec}
+% Level 1
+\titleformat{\section}
+  {\normalfont\fontsize{18}{0}\bfseries}{\thesection}{1em}{}
+% Level 2
+\titleformat{\subsection}
+  {\normalfont\fontsize{14}{0}\bfseries}{\thesection}{1em}{}
+% Level 3
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{12}{0}\bfseries}{\thesection}{1em}{}
+% Level 4
+\titleformat{\paragraph}
+  {\normalfont\fontsize{12}{0}\bfseries\itshape}{\theparagraph}{1em}{}
+% Level 5
+\titleformat{\subparagraph}
+  {\normalfont\fontsize{12}{0}\itshape}{\theparagraph}{1em}{}
+% Level 6
+\makeatletter
+\newcounter{subsubparagraph}[subparagraph]
+\renewcommand\thesubsubparagraph{%
+  \thesubparagraph.\@arabic\c@subsubparagraph}
+\newcommand\subsubparagraph{%
+  \@startsection{subsubparagraph}    % counter
+    {6}                              % level
+    {\parindent}                     % indent
+    {12pt} % beforeskip
+    {6pt}                           % afterskip
+    {\normalfont\fontsize{12}{0}}}
+\newcommand\l@subsubparagraph{\@dottedtocline{6}{10em}{5em}}
+\newcommand{\subsubparagraphmark}[1]{}
+\makeatother
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+\titlespacing*{\paragraph}{0pt}{12pt}{6pt}
+\titlespacing*{\subparagraph}{0pt}{12pt}{6pt}
+\titlespacing*{\subsubparagraph}{0pt}{12pt}{6pt}
+
+% Set caption to correct size and location
+\usepackage[tableposition=top, figureposition=bottom, font=footnotesize, labelfont=bf]{caption}
+
+% set page number location
+\usepackage{fancyhdr}
+\fancyhf{} % clear all header and footers
+\renewcommand{\headrulewidth}{0pt} % remove the header rule
+\rhead{\thepage}
+\pagestyle{fancy}
+
+% Overwrite Title
+\makeatletter
+\renewcommand{\maketitle}{\bgroup
+   \begin{center}
+   \textbf{{\fontsize{18pt}{20}\selectfont \@title}}\\
+   \vspace{10pt}
+   {\fontsize{12pt}{0}\selectfont \@author} 
+   \end{center}
+}
+\makeatother
+
+% Used for Tables and Figures
+\usepackage{float}
+
+% For using lists
+\usepackage{enumitem}
+
+\newenvironment{itemize*}%
+  {\begin{itemize}[rightmargin=\dimexpr\linewidth-120mm-\leftmargin\relax]%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{0pt}}%
+  {\end{itemize}}
+\usepackage{etoolbox}
+\AtBeginEnvironment{itemize*}{\setlength\parskip{-3pt}}
+\AfterEndEnvironment{itemize*}{\vspace*{-\dimexpr\parskip\relax}}
+
+
+\newenvironment{enumerate*}%
+  {\begin{enumerate}[rightmargin=\dimexpr\linewidth-120mm-\leftmargin\relax]%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{0pt}}%
+  {\end{enumerate}}
+\usepackage{etoolbox}
+\AtBeginEnvironment{enumerate*}{\setlength\parskip{-3pt}}
+\AfterEndEnvironment{enumerate*}{\vspace*{-\dimexpr\parskip\relax}}
+
+% For full citations inline
+\usepackage{bibentry}
+\nobibliography*
+
+% Custom Quote
+\newenvironment{myquote}[1]%
+  {\list{}{\leftmargin=#1\rightmargin=#1}\item[]}%
+  {\endlist}
+  
+% Create Abstract 
+\renewenvironment{abstract}
+{\vspace*{-.5in}\fontsize{12pt}{12}\begin{myquote}{.5in}
+\noindent \par{\bfseries \abstractname.}}
+{\medskip\noindent
+\end{myquote}
+}
+
+\begin{document}
+
+% Set Title, Author, and email
+% \title{Urban BIPV Annotated Bibliography}
+% \author{Justin McCarty \\ mccarty@arch.ethz.ch}
+
+% \maketitle
+\thispagestyle{fancy}
+
+% \section*{Reviews}
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{saretta_review_2019}}
+\textbf{Tags:} urban, review, retrofit, facade  \\
+\textbf{Who:} Research group from SUPSI and Milan polytechnic \\
+\textbf{Objective:} Through a literature review identify synergies between RES production (namely BIPV) and energy-based retrofits. \\
+\textbf{What:} Initially state that urban modelling of individual buildings is costly and time consuming, "not trivial". Rather focus on the "urban potential" of vertical facades that are candidates for energy retrofit. State that energy generation potential and retrofit are often treated as two separate areas of research. Evaluate the two realms independently and then make synergistic claims - 32 papers in all from the initial 175 identified. This reduction comes from a very specific scope for bottom-up models about BIPV of facades in an urban context. Exclude urban morphological studies. Interested in several types of potential (these are potentially very useful in workflow):
+
+\begin{itemize*}
+    \item Theoretical potential - total yearly solar irradiation received at a location
+    \item Geographic potential - annual solar irradiation integrated over building surfaces
+    \item Technical potential - annual generated energy from a PV system accounting for geographical potential and module/system efficiency.
+    \item Economic potential - the portion of the technical potential that has potential from a market perspective.
+\end{itemize*}
+
+The below synergies emerge in the review. The review supports the development of integrated methodologies. 
+
+\begin{itemize*}
+    \item The common analysis environment is found in GIS.
+    \item The emergence of 3D city models has led to novel calculation methods.
+    \item Data collected for facade retrofit purposes are paramount to analysis of BIPV facade potential.
+\end{itemize*}
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{kammen_city-integrated_2016}}
+\textbf{Tags:} urban, renewables, review \\
+\textbf{Who:} Berkeley authors from public policy and energy analysis.  \\
+\textbf{Objective:} Generally advocate for the potential of PV in the urban context as a way of meeting consumption needs at present. \\
+\textbf{What:} A review of the potential for RES to meet energy consumption needs in urban environments. Presents an initial analytical framework with three parameters: population density, renewable power density potential, and energy consumption per capita. This chart should be updated with more realistic curves based specifically on BIPV/T technologies at different climates with more spatially resolute population centers and include some degree of emissions mitigation and climate risk. Cite various challenges for wholesale deployment of urban renewables:
+
+Economic
+\begin{itemize*}
+    \item Cost may be too high and are not understood well.
+\end{itemize*}
+
+Technical
+\begin{itemize*}
+    \item Uncertainty and variability used to measure and account for urban energy use and emissions.
+    \item Lack of energy storage options localized to an energy district.
+\end{itemize*}
+
+Behavioral
+\begin{itemize*}
+    \item There is little social acceptance of power generation in high density areas due to fear of danger, real estate depreciation, and general aesthetic taste.
+    \item Personal automobile use is difficult to harmonize with distributed energy systems without sufficient storage.
+    \item Individual energy use is very difficult to model accurately and this can compound at scale.
+\end{itemize*}
+
+Policy
+\begin{itemize*}
+    \item R\&D in some countries and regions is nonexistent
+    \item Subsidies have been inconsistent and difficult to understand, particularly for the consumer.
+    \item Policy-makers have been focusing the bulk of their attention on technical matters. 
+    \item 
+\end{itemize*}
+
+Propose three immediate actions to spur development: (1) clean urban environments need to be made highly valuable, (2) carbon and water accounting need to be standardized, (3) create fee-bates for vehicles and transportation.
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{bensehla_solar_2021}}
+\textbf{Tags:} urban, future weather, potentials \\
+\textbf{Who:} Local researchers in Algeria and Portugal. \\
+\textbf{Objective:} Assess potential of  BIPV in multiple urban contexts to address cooling needs at present and under future climate assumption. \\
+\textbf{What:} Novelty of study is the analysis of energy and potential under future climate as well as present (as well as a localized study). Using City sim the authors analyze four urban typologies (not sure how they were chosen, heuristics likely). Citysim model was calibrated using utility derived consumption data. PV modeling is for rooftop rack systems using a c-Si panel. Meteonorm is used for future climate under AR4 - BAU. Simplistic modeling of PV system, just looking at efficiency (need to create a reference for this). Identify one urban form type as the most ideal to work on minimizing energy needs. One factor of note is that this urban form is well oriented for winter solar heat gain. Rooftop systems are shown to be successful in addressing large portions of demand year round, however if mechanical systems are not changed to more efficient modes in the future scenario then the reduction from baseline is lowered.
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{}}
+\textbf{Tags:}  \\
+\textbf{Who:}  \\
+\textbf{Objective:}  \\
+\textbf{What:} 
+
+\bibliographystyle{apalike}
+\nobibliography{urban_bipv_annotated}
+
+
+\end{document}

@@ -1,0 +1,379 @@
+\documentclass[11pt,a4paper]{article}
+
+
+% just for the example
+\usepackage{lipsum}
+% Set margins
+\usepackage[margin=35mm]{geometry}
+
+% for graphics
+\usepackage{graphicx}
+
+% for crimson text
+\usepackage{crimson}
+\usepackage[T1]{fontenc}
+
+% setup parameter indentation
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+% for 1.15 spacing between text
+\renewcommand{\baselinestretch}{1.0}
+
+% For defining spacing between headers
+\usepackage{titlesec}
+% Level 1
+\titleformat{\section}
+  {\normalfont\fontsize{18}{0}\bfseries}{\thesection}{1em}{}
+% Level 2
+\titleformat{\subsection}
+  {\normalfont\fontsize{14}{0}\bfseries}{\thesection}{1em}{}
+% Level 3
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{12}{0}\bfseries}{\thesection}{1em}{}
+% Level 4
+\titleformat{\paragraph}
+  {\normalfont\fontsize{12}{0}\bfseries\itshape}{\theparagraph}{1em}{}
+% Level 5
+\titleformat{\subparagraph}
+  {\normalfont\fontsize{12}{0}\itshape}{\theparagraph}{1em}{}
+% Level 6
+\makeatletter
+\newcounter{subsubparagraph}[subparagraph]
+\renewcommand\thesubsubparagraph{%
+  \thesubparagraph.\@arabic\c@subsubparagraph}
+\newcommand\subsubparagraph{%
+  \@startsection{subsubparagraph}    % counter
+    {6}                              % level
+    {\parindent}                     % indent
+    {12pt} % beforeskip
+    {6pt}                           % afterskip
+    {\normalfont\fontsize{12}{0}}}
+\newcommand\l@subsubparagraph{\@dottedtocline{6}{10em}{5em}}
+\newcommand{\subsubparagraphmark}[1]{}
+\makeatother
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+\titlespacing*{\paragraph}{0pt}{12pt}{6pt}
+\titlespacing*{\subparagraph}{0pt}{12pt}{6pt}
+\titlespacing*{\subsubparagraph}{0pt}{12pt}{6pt}
+
+% Set caption to correct size and location
+\usepackage[tableposition=top, figureposition=bottom, font=footnotesize, labelfont=bf]{caption}
+
+% set page number location
+\usepackage{fancyhdr}
+\fancyhf{} % clear all header and footers
+\renewcommand{\headrulewidth}{0pt} % remove the header rule
+\rhead{\thepage}
+\pagestyle{fancy}
+
+% Overwrite Title
+\makeatletter
+\renewcommand{\maketitle}{\bgroup
+   \begin{center}
+   \textbf{{\fontsize{18pt}{20}\selectfont \@title}}\\
+   \vspace{10pt}
+   {\fontsize{12pt}{0}\selectfont \@author} 
+   \end{center}
+}
+\makeatother
+
+% Used for Tables and Figures
+\usepackage{float}
+
+% For using lists
+\usepackage{enumitem}
+
+\newenvironment{itemize*}%
+  {\begin{itemize}[rightmargin=\dimexpr\linewidth-120mm-\leftmargin\relax]%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{0pt}}%
+  {\end{itemize}}
+\usepackage{etoolbox}
+\AtBeginEnvironment{itemize*}{\setlength\parskip{-3pt}}
+\AfterEndEnvironment{itemize*}{\vspace*{-\dimexpr\parskip\relax}}
+
+
+\newenvironment{enumerate*}%
+  {\begin{enumerate}[rightmargin=\dimexpr\linewidth-120mm-\leftmargin\relax]%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{0pt}}%
+  {\end{enumerate}}
+\usepackage{etoolbox}
+\AtBeginEnvironment{enumerate*}{\setlength\parskip{-3pt}}
+\AfterEndEnvironment{enumerate*}{\vspace*{-\dimexpr\parskip\relax}}
+
+% For full citations inline
+\usepackage{bibentry}
+\nobibliography*
+
+% Custom Quote
+\newenvironment{myquote}[1]%
+  {\list{}{\leftmargin=#1\rightmargin=#1}\item[]}%
+  {\endlist}
+  
+% Create Abstract 
+\renewenvironment{abstract}
+{\vspace*{-.5in}\fontsize{12pt}{12}\begin{myquote}{.5in}
+\noindent \par{\bfseries \abstractname.}}
+{\medskip\noindent
+\end{myquote}
+}
+
+\begin{document}
+
+% Set Title, Author, and email
+% \title{Urban BIPV Annotated Bibliography}
+% \author{Justin McCarty \\ mccarty@arch.ethz.ch}
+
+% \maketitle
+\thispagestyle{fancy}
+
+% \section*{Reviews}
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{kuhn_review_2021}}
+\textbf{Tags:} sector coupling, urban, review, technology \\
+\textbf{Who:} Group of researchers from Fraunhofer and Erban PV-Consulting (Sunovation) \\
+\textbf{Objective:}  Review design options for BIPV \\
+\textbf{What:} This paper reviews and analyzes technological design options for BIPV roofs and facades. This provides an overview of existing technologies without the context (or complication) of buildings. Several levels of design options are investigated through a comprehensive hierarchical framework:
+\begin{itemize*}
+    \item Cell scale design options and layering are show in a multitude of combinations of material and electrical layout. This section provides a comprehensive summary of the various interconnection styles available. An open question seems to be which interconnections match well with each cell type.
+    \item Module level design is investigated to show to that two primary design options are being used now; pattern and color. As well they can either be hidden or displayed. Pattern is an interesting topic as it is a prominent feature of new and old buildings. Methods of making colored panels are summarized well.
+    \item Complete electrical systems are reviewed stressing the unusual nature of their electrical design relative to ground mount systems. The effect of partial shading can lead to complex wiring systems as well as present novel designs. There are also multiple scales of wiring to consider from the cell to the building integration level. The open question though is in BIPV design what analyses details (time, LOD, resolution) are necessary to produce authentic results without diminishing returns. Storage is interestingly under-reported on.
+    \item Envelope integration and construction options are reviewed. They find that there aren't complications with construction integration into envelope systems. Rather the difficulty here is that planning is across trades and requires an elevated project delivery model (i.e. IPD). This system also helps identify where they may be regulatory conflicts due to BIPV such as envelope fire safety and electrical design. A clear area of integration is that of early stage design. Successful BIPV deployment requires deep integration with the design process to identity potential points in the day where generation is more desirable, or to be sure to not reduce solar heat gain. Lastly they provide tables and a set of categories to define the installation possibilities.
+\end{itemize*}
+This paper also provides a very good overview of BIPV, from common metrics for estimating performance to good summaries of needed generation to meet energy and carbon targets.
+The paper concludes by stating the crystalline silicon-based cell technology provides the most advantages for BIPV due to their durability and economy of scale. As well recommendations for future development of the BIPV industry focus more on standardization and regulatory frameworks, demonstration, digitalization, and new business models for renewable energy systems.
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{ghosh_potential_2020}}
+\textbf{Tags:} cell generation, bapv, challenges, ev \\
+\textbf{Who:} RES and BIPV skin expert from Uni Exeter \\
+\textbf{Objective:}  Propose solutions to BIPV and BAPV deployment and note future technolgies through a review of case studies. \\
+\textbf{What:} Review of BIPV and BAPV application to assess their advantages and challenges as well as propose solutions and future technologies. Reviews the cell technology by its generation:
+
+First Generation Crystalline Silicon (c-Si)
+\begin{itemize*}
+    \item A mature technology with consistent lifetimes and a large production base and generally around a 3-4 year payback period.
+    \item Mono-crystalline panels typically efficiency is around 18\% reaching in the low 20s.
+    \item Poly-crystalline is a similar technology but without uniform presence and slightly lower efficiency. 
+    \item Canadian Solar, JA Solar, JinkoSolar, Hanwha Q-CELL, LONGI, Tongwei, Trina Solar are the present leading vendor for first-generation crystalline silicon PV cells.
+\end{itemize*}
+Second Generation Thin Film
+\begin{itemize*}
+    \item Generally low cost to produce as well as lower efficiency. Light weight and easy application.
+    \item Cadmium telluride (CdTe) is formulated from toxic and rare materials. Currently a lower efficiency but with a high theoretical of 29\%. Energy payback is 2-3 years and 20 year life.
+    \item Copper inidium gallium selenide sulphide (CIGS) Lower production cost than c-Si but higher than CdTe. Production cells have a roughly 14\% efficiency standard. Expect to retain 80\% of production capability after 20 years but field studies are still to young to confirm. Energy payback is 1-3 years and 20 year life.
+    \item Amorphous silicon (a-Si) absorbs more solar radiation than c-Si with a lower temperature coefficient. This marks it as a potentially high performer in warmer climates or contexts. Radpily growing market. Energy payback is 2-3 years and 25 year life.
+    \item Global thin-film PV cell are Ascent Solar Technologies., Asia Ltd., First Solar, Global Solar, Miasole Hi-Tech Corp., US, Hankey Kaneka Corporation, Trony Solar, Mitsubishi Electric and Xunlight Kunshan Co. Ltd.
+\end{itemize*}
+Third Generation
+\begin{itemize*}
+    \item Dye-sensitized solar cell (DSSC) can be made semi-transparent, degrade rapidly but achieve around 12\% efficiency. Thermal stability is currently questionable. In theory can reach a 20 year lifetime with payback at 1-3 years. Globally major DSSC companies include 3GSolar Photovoltaics, Dyesol, Exeger Sweden AB, Fujikura Ltd., G24 Power., GCell, Merck KGaA.
+    \item Perovskite solar cells (PSC) offer efficiency up to 22\% at this time although many experimental applications propose even double that. Not quite ready for market as stability is in question due to dust, water, UV, etc. Produced with lead and thus difficult to clear regulation. Can be semi-transparent and tuned and are rapidly becoming a major research space. Oxford photovoltaics, OIST’s Technology, Solliance, Toshiba and NEDO are currently the major perovskite PV cell developers.
+    \item Organic PV (OPV) has the ability to absorb the entire solar spectrum. HAve degradation issues and lower efficiency but have a short payback time around a half year to 3 years. Epishine, Heliatek GmbH, Merck Group, OPVIUS GmbH, infinity PV are the major companies which manufacture organic PV cells.
+\end{itemize*}
+Presents overview of different applications (roof, facade, window, concentrator) and discusses grid tie and different electrical layouts. Discusses technical challenges and proposed solutions:
+\begin{itemize*}
+    \item High temperatures can lead to reduced performance. Introduce passive or active cooling systems.
+    \item Partial shading from nearby objects or dust/grime on the panels can greatly impact performance and lifetime. Self cleaning methods exist as well as material treatments for the modules themselves.
+    \item Scaling has been difficult with multiple generations of cells, as has been the development of standards and regulations.
+    \item BIPV can impact occupant comfort in many ways.
+\end{itemize*}
+Future applications explored largely touch on some form of coupling, either with another sector (mobility) or another building service (active windows and passive ventilation). Future technology covered is largely focused on lightweight materials, color or invisibility, and sensor application, BIM integration, and quantum dot.
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{weerasinghe_economic_2021}}
+\textbf{Tags:} case study, economics, non-domestic, lca  \\
+\textbf{Who:} Primarily an Australian group of researchers. \\
+\textbf{What:} Study predicated on idea that BIPV is viewed as too costly. LCEO, NPV, and discounted payback periods (DPP) used to show that BIPV is economically feasible. Look at both direct (energy generation value) and the indirect (replacement value over other building systems). Indirect cost is rarely used in the reviewed work, even though they find that these indirect cost measurements typically drive investment decisions. Provides a good resource for economic equations. Presents a 45 project database with enough data to calculate economic cost and classifies the types of BIPV into a set of categories that should be compared with other sources. Distributions vary within their calculations but largely the analysis shows that the majority of projects are economically viable when considering effective price. The importance of considering BIPV with material replacement value is stressed.
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{dabija_review_2020}}
+\textbf{Tags:} challenges, general, multifunction \\
+\textbf{Who:} Researches from Arch Engineering at United Arab Emirates University  \\
+\textbf{Objective:}  Provied a general overview of BIPV barriers and drivers. \\
+\textbf{What:} A short overview of BIPV general challenges and benefits. Ultimately they justify the environmental and building benefits of BIPV. As well argue that as districts and buildings are made more intelligent the materials with which we build them must be compatible. The primary challenge that they identify is that designing with BIPV means that the ultimate goal of PV is not realized in terms of maximizing output. This is clearly a notion that must be let go of as we cannot quantify the aesthetics of a building in a way that it can be computationally calculated to compete with total yield. Other challenges include:
+
+Economy 
+\begin{itemize*}
+    \item material and systems costs
+    \item governmental support and policies
+    \item international or bank support
+\end{itemize*}
+
+Product 
+\begin{itemize*}
+    \item system performance
+    \item design standards, codes, regulations, best practices
+    \item \textbf{design tools and software}
+    \item aesthetics and architectural integration
+\end{itemize*}
+
+Education 
+\begin{itemize*}
+    \item professional training and expertise
+    \item curriculum development
+    \item public awareness and perception
+\end{itemize*}
+
+Management \& Project Delivery
+\begin{itemize*}
+    \item project delivery not currently set up for integrated design
+\end{itemize*}
+
+Industry 
+\begin{itemize*}
+    \item slow to adopt new techniques
+    \item \textbf{disconnect between customization and economy of scale manufacturing}
+\end{itemize*}
+
+Demonstration projects 
+\begin{itemize*}
+    \item \textbf{comprehensive database necessary}
+\end{itemize*}
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{attoye_review_2017}}
+\textbf{Tags:} drivers, barriers, review, design \\
+\textbf{Who:} Researches from Arch Engineering at United Arab Emirates University \\
+\textbf{Objective:}  Investigate the promise of BIPV customization as a way to overcome many barriers to adoption. \\
+\textbf{What:} The authors sought to review facade customization options as a means of enhancing project adoption. Primary conclusion is that BIPV customization can overcome the bulk of barriers to adoption. Define customization as any product development that is targeted to a specific project need. Classify four facade types:
+
+\begin{itemize*}
+    \item curtain wall \& cladding systems
+    \item solar glazing and windows
+    \item external devices \& accessories
+    \item advanced \& innovative envelope systems
+\end{itemize*}
+
+In their meta-study of barriers they find that misconceptions in the public sphere (and architects) and the lack of professional training and expertise are the most cited barriers. Insufficient bank support and the lac of a comprehensive project database are the least cited barriers. Create a set of customization strategies:
+
+\begin{itemize*}
+    \item systematic parametric variation (SPV): iterative parametric system changes to reach optimum goal
+    \item Modification of Conventional Features (MCF): modify conventional BIPV parts
+    \item Enhanced Design Modularization (EDM): update BIPV facade types into unique modules
+    \item Compositional Modification and Hybridization (CMH): combine special materials with BIPV
+\end{itemize*}
+
+Include a table of projects that they analyses using a variety of customization categories and computational research. In this review they found that customization is largely focused on module itself while the integration aspect is ideally a standard architectural product or mechanism. Also found that customization can clearly impact thermal control and often improve it. Conclude with summary of the advantages of customization:
+
+\begin{itemize*}
+    \item Flexibility and applicability at an elemental and compositional level
+    \item Versatility in development of both custom BIPV products and custom BIPV integration schemes
+    \item Multiple type strategies in single or combined scenarios can be used to achieve objectives
+    \item Increase in power output and performance is possible in a range of 2–80\% based on design
+    \item Although, reduction in power output and performance occurs also at a range of 4–70\% based on design
+\end{itemize*}
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{agathokleous_status_2020}}
+\textbf{Tags:}  review, bipvt, integration \\
+\textbf{Who:} Department of Mechanical Engineering and Materials Science, Cyprus University of Technology \\
+\textbf{Objective:} Overview of available research.  \\
+\textbf{What:} The most important barriers of the BIPV systems are the feed in tariff implementation, the public acceptance, the governmental economic support in terms of subsidies and technical aspects like the power losses and the architectural considerations. Provides good diagrammatic overview of BIPV installations with airflow. Conclude that following barriers are to blame for the slow adoption of BIPV when compare to BAPV:
+
+\begin{itemize*}
+    \item BIPV introduces new issues with heat transfer to envelope design.
+    \item Post installation there is a lack of system monitoring and therefore an inability to study the performance or even if the system is meeting targets.
+    \item Design is typically rudimentary just utilizing the most amount of space available without critical thought to BIPV target wihtout a regard for orientation, tilt, self-shading.
+    \item Maintenance is ill-conceived in the design stage.
+    \item Custom integration and mounting systems lead to costly design and code review processes as well as failures.
+    \item Typically a lack of codes related to BIPV and occupant/public safety, comfort issues such as acoustics, and structural design.
+    \item Calculating the cost and economics of systems is not a defined method and many different methods are applied.
+\end{itemize*}
+
+Propose the following solutions to develop growth in the future:
+
+\begin{itemize*}
+    \item system appearance and design configuration development (further integration, sleeker designs)
+    \item realistic performance with early stage modelling tools (high res shading, connection with energy)
+    \item guidelines and regulation (safety, maintenance)
+\end{itemize*}
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{jelle_building_2016}}
+\textbf{Tags:} review, research \\
+\textbf{Who:} Researcher from Norwegian University of Science and Technology \\
+\textbf{Objective:} Summarize current BIPV technologies and address several potential research opportunities. \\
+\textbf{What:} Classify several state of the art technology groups:
+
+\begin{itemize*}
+    \item Foil products are thin film, flexible systems that are adequate in rain screen type applications.
+    \item Tile products are typically highly aestheticised products meant to replicate a style of roof that is common, therefore introducing PV generation without the potentially antagonizing elements of BAPV.
+    \item Module products offer the simplicity and economy of standard PV modules with the added benefit of rain screen performance.
+    \item Glazed products vary in their construction and technology significantly to suit the need to the project. 
+\end{itemize*}
+
+In assessing future growth they state that the future technologies may likely have the most influence on BIPV as a whole. Provides a good overview of future cell technology. Other future pathways include storage, retrofit applications, subsidy design, maintenance and self-cleaning, and glazing solutions. 
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{zhong_technology_2020}}
+\textbf{Tags:} frontiers, review, network analysis, clustering \\
+\textbf{Who:} Researchers from several institutions across China and Singapore including ETH Zurich, Singapore Future Resilient Systems group \\
+\textbf{Objective:} Map the development of BIPV technology over time to provide overview of field and growth as well as overcome need for expert opinion or peer review in establishing field trends. \\
+\textbf{What:} Initially start by identifying the barriers to BIPV adoption: low efficiency of cell generation, high cost of installation and maintenance, and aesthetics. New technologies are born often to address these problems, but many fail to come to fruition due to their own inherent flaws. Tracking patent growth through network analysis can identify consistent evolution in technology and innovation points. Are able to classify the period of patent growth and therefore relate the market to phases:
+
+Budding period (1972-2007) 19 patents in four clusters:
+\begin{enumerate*}
+    \item One patent for the first use of a frameless solar cell module using a-Si (improved weight and cost of conventional modules)
+    \item One patent for the first use of a solar cell with a ventilation chamber designed to push warm air. Improved efficiency, added cobenefit, and improved durability
+    \item Multiple patents for the design of PV roof systems including module development and eventually shingle interconnections.
+    \item Multiple patents for the construction of PV roof systems including frame design.
+\end{enumerate*}
+
+Growth period (2008-2011) 90 patents in five clusters:
+\begin{enumerate*}
+    \item Multiple patents that relate to fixed and installed systems of glass plates and PV as well as connection systems for battereis and glass-glass laminates.
+    \item Multiple patents for optimization methods between PV components and the electrical system.
+    \item Multiple patents for facade BIPV development and mounting systems.
+    \item Multiple patents for optimizing module layout and designing roof components.
+    \item Multiple patents for the use of BIPV with ventilated cavities
+\end{enumerate*}
+
+Maturity period (2021-2016) 20 patents in four clusters:
+\begin{enumerate*}
+    \item Multiple patents for rooftop PV systems with a focus on weatherproofing and tilt.
+    \item Three patents for laminating and adhering PV in rooftop systems under vacuum. 
+    \item Multiple patents focused on designing electrical safety systems and automatic cutoff or low-power switches.
+    \item Multiple patents for the design of better electrical connections.
+\end{enumerate*}
+
+Furthermore they were able to identify three research frontiers: PV module support systems, the design of BIPV components such as shingles and those that do not need external support systems, and intelligent control systems. Final assessment is that BIPV technology and support design is maturing but still has significant growth potential and that PV control systems are becoming a central point of research and are in their initial stage of development. 
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{parida_review_2011}}
+\textbf{Tags:} review, pv, technology \\
+\textbf{Who:} Mechanical engineering research team from Chennai, India and Split, Croatia \\
+\textbf{Objective:} Review PV technology. \\
+\textbf{What:} While an older and broad review this provides a sense of where the BIPV technology has come in a decade. Split into two main sections, material and application. this summary only focuses on the BIPV application section. Description of multiple studies and designs to have BIPV systems provide a cooling benefit. Some early papers discuss the BIPV and grid connection theories. Largely not unfamiliar points are shown in this small section. Interesting to see application has not necessarily moved far in 10 years, rather the technology has. 
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{}}
+\textbf{Tags:}  \\
+\textbf{Who:}  \\
+\textbf{Objective:}  \\
+\textbf{What:} 
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{}}
+\textbf{Tags:}  \\
+\textbf{Who:}  \\
+\textbf{Objective:}  \\
+\textbf{What:} 
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{}}
+\textbf{Tags:}  \\
+\textbf{Who:}  \\
+\textbf{Objective:}  \\
+\textbf{What:} 
+
+\bibliographystyle{apalike}
+\nobibliography{urban_bipv_annotated}
+
+
+\end{document}

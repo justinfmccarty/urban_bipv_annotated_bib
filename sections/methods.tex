@@ -1,0 +1,188 @@
+\documentclass[11pt,a4paper]{article}
+
+
+% just for the example
+\usepackage{lipsum}
+% Set margins
+\usepackage[margin=35mm]{geometry}
+
+% for graphics
+\usepackage{graphicx}
+
+% for crimson text
+\usepackage{crimson}
+\usepackage[T1]{fontenc}
+
+% setup parameter indentation
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+
+% for 1.15 spacing between text
+\renewcommand{\baselinestretch}{1.0}
+
+% For defining spacing between headers
+\usepackage{titlesec}
+% Level 1
+\titleformat{\section}
+  {\normalfont\fontsize{18}{0}\bfseries}{\thesection}{1em}{}
+% Level 2
+\titleformat{\subsection}
+  {\normalfont\fontsize{14}{0}\bfseries}{\thesection}{1em}{}
+% Level 3
+\titleformat{\subsubsection}
+  {\normalfont\fontsize{12}{0}\bfseries}{\thesection}{1em}{}
+% Level 4
+\titleformat{\paragraph}
+  {\normalfont\fontsize{12}{0}\bfseries\itshape}{\theparagraph}{1em}{}
+% Level 5
+\titleformat{\subparagraph}
+  {\normalfont\fontsize{12}{0}\itshape}{\theparagraph}{1em}{}
+% Level 6
+\makeatletter
+\newcounter{subsubparagraph}[subparagraph]
+\renewcommand\thesubsubparagraph{%
+  \thesubparagraph.\@arabic\c@subsubparagraph}
+\newcommand\subsubparagraph{%
+  \@startsection{subsubparagraph}    % counter
+    {6}                              % level
+    {\parindent}                     % indent
+    {12pt} % beforeskip
+    {6pt}                           % afterskip
+    {\normalfont\fontsize{12}{0}}}
+\newcommand\l@subsubparagraph{\@dottedtocline{6}{10em}{5em}}
+\newcommand{\subsubparagraphmark}[1]{}
+\makeatother
+\titlespacing*{\section}{0pt}{12pt}{6pt}
+\titlespacing*{\subsection}{0pt}{12pt}{6pt}
+\titlespacing*{\subsubsection}{0pt}{12pt}{6pt}
+\titlespacing*{\paragraph}{0pt}{12pt}{6pt}
+\titlespacing*{\subparagraph}{0pt}{12pt}{6pt}
+\titlespacing*{\subsubparagraph}{0pt}{12pt}{6pt}
+
+% Set caption to correct size and location
+\usepackage[tableposition=top, figureposition=bottom, font=footnotesize, labelfont=bf]{caption}
+
+% set page number location
+\usepackage{fancyhdr}
+\fancyhf{} % clear all header and footers
+\renewcommand{\headrulewidth}{0pt} % remove the header rule
+\rhead{\thepage}
+\pagestyle{fancy}
+
+% Overwrite Title
+\makeatletter
+\renewcommand{\maketitle}{\bgroup
+   \begin{center}
+   \textbf{{\fontsize{18pt}{20}\selectfont \@title}}\\
+   \vspace{10pt}
+   {\fontsize{12pt}{0}\selectfont \@author} 
+   \end{center}
+}
+\makeatother
+
+% Used for Tables and Figures
+\usepackage{float}
+
+% For using lists
+\usepackage{enumitem}
+
+\newenvironment{itemize*}%
+  {\begin{itemize}[rightmargin=\dimexpr\linewidth-120mm-\leftmargin\relax]%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{0pt}}%
+  {\end{itemize}}
+\usepackage{etoolbox}
+\AtBeginEnvironment{itemize*}{\setlength\parskip{-3pt}}
+\AfterEndEnvironment{itemize*}{\vspace*{-\dimexpr\parskip\relax}}
+
+
+\newenvironment{enumerate*}%
+  {\begin{enumerate}[rightmargin=\dimexpr\linewidth-120mm-\leftmargin\relax]%
+    \setlength{\itemsep}{0pt}%
+    \setlength{\parskip}{0pt}}%
+  {\end{enumerate}}
+\usepackage{etoolbox}
+\AtBeginEnvironment{enumerate*}{\setlength\parskip{-3pt}}
+\AfterEndEnvironment{enumerate*}{\vspace*{-\dimexpr\parskip\relax}}
+
+% For full citations inline
+\usepackage{bibentry}
+\nobibliography*
+
+% Custom Quote
+\newenvironment{myquote}[1]%
+  {\list{}{\leftmargin=#1\rightmargin=#1}\item[]}%
+  {\endlist}
+  
+% Create Abstract 
+\renewenvironment{abstract}
+{\vspace*{-.5in}\fontsize{12pt}{12}\begin{myquote}{.5in}
+\noindent \par{\bfseries \abstractname.}}
+{\medskip\noindent
+\end{myquote}
+}
+
+\begin{document}
+
+% Set Title, Author, and email
+% \title{Urban BIPV Annotated Bibliography}
+% \author{Justin McCarty \\ mccarty@arch.ethz.ch}
+
+% \maketitle
+\thispagestyle{fancy}
+
+% \section*{Reviews}
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{saretta_calculation_2020}}
+\textbf{Tags:} lod, urban, method, facade \\
+\textbf{Who:} Researchers from SUPSI and Milan Polytechnic \\
+\textbf{Objective:} Assess urban BIPV facade potential using a slightly higher resolution model than standard LOD2 GIS models. \\
+\textbf{What:} Simple rooftop systems are not going to be sufficient enough to reach BIPV targets, therefore facade integration is necessary. However due to non-optimal inclination and local shading, vegetation shading, and highly variable architectural elements facade potential estimation is difficult. This has led to a dearth of knowledge for developers looking at urban solar potential maps. Do show two tool sin Europe for quick facade assessments. In assessing the difference between the resolute exterior LOD3 standard and the current standard used LOD2 the authors find that an inbetween is necessary to keep cost and development time down while still proving to be more accurate in simulation. In presenting the methodology they also share a table of other studies for urban potentials and their LOD. 
+
+LOD2.5 utilizes facade archetypes derived from LOD3 and applied to LOD2 models to create more accurate surfaces. LOD2 is claimed to just be a surface representation without openings. Using a set of archetypes for the homes new facades are created that add openings, balconies, protrusions, and overhangs. These are then used to create a mean reduction factors to reduce the facade area by (reverse of using WWR). Another reduction factors is generated for the archetypes in grasshopper taking the mean of a variety of roof overhang studies. A third factor is created based on protrusions and rules base don the shape of the protrusion.  
+
+Analysis shows that this method is a viable path to calculating solar exposure more accurately. However it may be hard to scale and use across different typologies. It also does not go into the depth of string layout, temperature, and conversion.
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{jakica_state---art_2018}}
+\textbf{Tags:} review, ray trace, tools \\
+\textbf{Who:} Milan Polytechnic Architecture \\
+\textbf{Objective:} Inventory and review possible tools for solar design with emphasis on BIPV design. \\
+\textbf{What:} We are no longer in a novel ray tracing world. New technologies allow fast and accurate simulations, particularly the evolution of GPU methods. This review discusses tools and approaches as well as trends in the solar design simulation landscape. Of note in the review of development sin the space was the topic on Spectral rendering is of interest. Radiance relevance on the decline due to its need for computational efficiency being eclipsed by the availability of raw processing power.
+
+Bidirectional Scattering Distribution Function (BSDF) poses an interesting possible area for BIPV simulation as it can account for complex scattering and physical properties. At the urban scale tools are underdeveloped. Provides a comprehensive table review of all known tools.
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{}}
+\textbf{Tags:}  \\
+\textbf{Who:}  \\
+\textbf{Objective:}  \\
+\textbf{What:} 
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{}}
+\textbf{Tags:}  \\
+\textbf{Who:}  \\
+\textbf{Objective:}  \\
+\textbf{What:} 
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{}}
+\textbf{Tags:}  \\
+\textbf{Who:}  \\
+\textbf{Objective:}  \\
+\textbf{What:} 
+
+\noindent\rule{\textwidth}{1pt}
+\subsection*{\bibentry{}}
+\textbf{Tags:}  \\
+\textbf{Who:}  \\
+\textbf{Objective:}  \\
+\textbf{What:} 
+
+\bibliographystyle{apalike}
+\nobibliography{urban_bipv_annotated}
+
+
+\end{document}
